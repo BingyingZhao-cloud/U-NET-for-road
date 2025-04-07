@@ -2,14 +2,14 @@
 #------------------------------
 
 #图像路径配置
-TEST_IMAGE_DIR = './data/archive/test'
+TEST_IMAGE_DIR = './data/test'
 
-TRAIN_IMAGE_DIR = './data/archive/train'
+TRAIN_IMAGE_DIR = './data/train'
 
-VALID_IMAGE_DIR = './data/archive/valid'
+VALID_IMAGE_DIR = './data/valid'
 
 #标签路径配置
-TRAIN_MASK_DIR = './data/archive/train'
+TRAIN_MASK_DIR = './data/train'
 
 #-------------------------------
 
