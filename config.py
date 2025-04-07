@@ -11,6 +11,7 @@ VALID_IMAGE_DIR = './data/valid'
 #标签路径配置
 TRAIN_MASK_DIR = './data/train'
 
+VALID_MASK_DIR = '.data/valid'
 #-------------------------------
 
 
