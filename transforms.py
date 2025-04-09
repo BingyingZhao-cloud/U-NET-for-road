@@ -1,40 +1,35 @@
-import numpy as np
-from PIL import Image
-import torch
 from torchvision import transforms as T
+import numpy as np
+import torch
+from PIL import Image
 
+# Joint transform 操作，将对 image 和 mask 同步进行
 class JointCompose:
-    """
-    同时对 image 和 mask 应用一系列变换
-    """
     def __init__(self, transforms):
         self.transforms = transforms
 
-    def __call__(self, image, mask):
+    def __call__(self, image, mask=None):
         for t in self.transforms:
             image, mask = t(image, mask)
         return image, mask
 
+# Resize，同时对 image 和 mask 处理
 class Resize:
-    """
-    将 PIL Image 和 numpy mask 一起 resize
-    """
     def __init__(self, size):
         self.size = size
 
-    def __call__(self, image, mask):
-        # image: PIL.Image, mask: numpy.ndarray
-        image = image.resize(self.size, resample=Image.BILINEAR)
-        mask_pil = Image.fromarray(mask)
-        mask_pil = mask_pil.resize(self.size, resample=Image.NEAREST)
-        mask = np.array(mask_pil)
+    def __call__(self, image, mask=None):
+        image = image.resize(self.size, Image.BILINEAR)
+        if mask is not None:
+            mask_pil = Image.fromarray(mask)
+            mask = mask_pil.resize(self.size, Image.NEAREST)
+            mask = np.array(mask)
         return image, mask
 
+# ToTensor，转为 PyTorch tensor
 class ToTensor:
-    """
-    将 PIL Image 转为 Tensor,将 numpy mask 转为 Tensor
-    """
-    def __call__(self, image, mask):
-        image = T.ToTensor()(image)                # [C, H, W], float [0,1]
-        mask  = torch.from_numpy(mask).unsqueeze(0).float()  # [1, H, W]
+    def __call__(self, image, mask=None):
+        image = T.ToTensor()(image)
+        if mask is not None:
+            mask = torch.from_numpy(mask).float().unsqueeze(0)  # shape: [1, H, W]
         return image, mask

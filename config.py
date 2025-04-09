@@ -31,7 +31,7 @@ BINARIZATION_THRESHOLD = 128
 #-------------------------------
 
 #DeepGlobe 数据集中图像尺寸为1024*1024, RGB格式
-IMAGE_SIZE = (1024,1024)
+IMAGE_SIZE = (512,512)
 
 INPUT_CHANNELS = 3 #RGB图像有3个通道
 OUTPUT_CHANNELS = 1 #分割任务输出为单通道二值mask
@@ -44,8 +44,8 @@ MUM_CLASSES = 2 #类别数： 背景和通道
 #训练相关配置
 #-------------------------------
 
-BATCH_SIZE = 8 #每个batch的样本数，根据显存大小调整
-NUM_EPOCHS = 50 #训练轮数
+BATCH_SIZE = 2 #每个batch的样本数，根据显存大小调整
+NUM_EPOCHS = 10 #训练轮数
 LEARNING_RATE = 0.001 #学习率
 WEIGHT_DECAY = 1e-4 #权重衰减（正则化）
 MOMENTUM = 0.9 #动量参数
